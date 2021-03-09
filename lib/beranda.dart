@@ -1,24 +1,31 @@
+//Repository import
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:list_view/product_model.dart';
 import './product_detail.dart';
 
+//Class Beranda
 class Beranda extends StatefulWidget {
   @override
   _BerandaState createState() => _BerandaState();
 }
 
+//State CLass
 class _BerandaState extends State<Beranda> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
 
+      //AppBar
       appBar: AppBar(
         backgroundColor: Colors.green,
         title: 
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-            Text('Beranda')
-          ]),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center, 
+            children: <Widget>[
+              Text('Beranda')
+            ]
+          ),
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.search), 
@@ -35,6 +42,7 @@ class _BerandaState extends State<Beranda> {
           ],
       ),
 
+      //Side Navigation Bar
       drawer: new Drawer(
         child: new ListView(
           children: <Widget>[
@@ -56,6 +64,7 @@ class _BerandaState extends State<Beranda> {
               ),
             ),
 
+            //Menu
             new ListTile(              
               title: new Text('Keranjang Belanja'),
               trailing: new Icon(Icons.shopping_cart_sharp),
@@ -81,10 +90,13 @@ class _BerandaState extends State<Beranda> {
         ),
       ),
     
+      //Body
       body: new ListView(
         children: <Widget>[
+          //Header Image
           Image.asset("assets/bg_image.jpg", height: 250, fit: BoxFit.cover,),         
 
+          //Category List
           Container(
             padding: EdgeInsets.only(top: 10, bottom: 10),
             decoration: BoxDecoration(
@@ -94,8 +106,9 @@ class _BerandaState extends State<Beranda> {
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
+              children: <Widget>[                
                 
+                //Category Item
                 Column(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -111,6 +124,7 @@ class _BerandaState extends State<Beranda> {
                   ],
                 ),
 
+                //Category Item
                 Column(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -125,7 +139,8 @@ class _BerandaState extends State<Beranda> {
                     )
                   ],
                 ),
-
+                
+                //Category Item
                 Column(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -141,6 +156,7 @@ class _BerandaState extends State<Beranda> {
                   ],
                 ),
 
+                //Category Item
                 Column(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -156,6 +172,7 @@ class _BerandaState extends State<Beranda> {
                   ],
                 ),
 
+                //Category Item
                 Column(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -174,31 +191,34 @@ class _BerandaState extends State<Beranda> {
               ],
             ),
           ),
-
+          
+          //Margin
           SizedBox(height: 20,),
+          //Product Carousel Label Contaier
           Container(            
-              padding: EdgeInsets.fromLTRB(24, 12, 24, 12),
-              child: Column(
-                children: <Widget>[
-                  Row(                    
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        "Produk Terlaris", 
-                        style: TextStyle(
-                          fontSize: 22.0, fontWeight: FontWeight.bold, color: Colors.green),
-                      ),
-                      Text(
-                        "Lihat semua",
-                        style: TextStyle(
-                          color: Colors.grey)
-                      ),
-                    ],
-                  ),
-                ],
+            padding: EdgeInsets.fromLTRB(24, 12, 24, 12),
+            child: Column(
+              children: <Widget>[
+                Row(                    
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      "Produk Terlaris", 
+                      style: TextStyle(
+                        fontSize: 22.0, fontWeight: FontWeight.bold, color: Colors.green),
+                    ),
+                    Text(
+                      "Lihat semua",
+                      style: TextStyle(
+                        color: Colors.grey)
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
 
+          //Calling the productCarousel class
           productCarousel(),
 
         ],
@@ -207,6 +227,8 @@ class _BerandaState extends State<Beranda> {
   }
 }
 
+
+//ProductCarousel class
 // ignore: camel_case_types
 class productCarousel extends StatelessWidget {      
 
@@ -217,15 +239,17 @@ class productCarousel extends StatelessWidget {
       height: 300.0,      
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: products.length,        
+        itemCount: products.length, //itemCount to inisiate how many listView would be display     
         itemBuilder: (BuildContext context, int index){
-          product productList = products[index];
+          product productList = products[index]; //inisiate new object from product class
+          
+          //GestureDetector          
           return GestureDetector(
             onTap: () => Navigator.push(
               context, 
               MaterialPageRoute(
                 builder: (BuildContext context) => ProductDetail(
-                  productList : productList
+                  productList : productList //giving an object parameter to ProductDetail class 
                 ),
               )
             ),
@@ -250,7 +274,7 @@ class productCarousel extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            '${productList.productName}',
+                            '${productList.productName}', //calling the object item
                             style: TextStyle(
                               fontSize: 18.0,
                               color: Colors.grey[700]
